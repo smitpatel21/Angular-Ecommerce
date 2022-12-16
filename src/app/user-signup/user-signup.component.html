@@ -1,0 +1,107 @@
+<div class="mb-3" *ngIf="!showLogin">
+  <form [formGroup]="signupForm" (ngSubmit)="signup()">
+    <h1>user signup</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="name"
+        name="name"
+        formControlName="name"
+      />
+      <span style="color: red" *ngIf="name && name.invalid && name.touched">
+        This field is required
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="email"
+        formControlName="email"
+      />
+      <span style="color: red" *ngIf="email && email.invalid && email.touched">
+        This field is required
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="password"
+        formControlName="password"
+      />
+      <span
+        style="color: red"
+        *ngIf="password && password.invalid && password.touched"
+      >
+        This field is required
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label"
+        >Confirm Password</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="password"
+
+      />
+      <span
+        style="color: red"
+        *ngIf="password && password.invalid && password.touched"
+      >
+        This field is required
+      </span>
+    </div>
+    <button type="submit" class="btn btn-primary me-3">Submit</button>
+    <button class="btn btn-secondary"  (click)="openLogin()">Open Login</button>
+  </form>
+</div>
+
+<div *ngIf="showLogin">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <h1>user login</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="email"
+        formControlName="email"
+      />
+      <span style="color: red" *ngIf="email && email.invalid && email.touched">
+        This field is required
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="password"
+        formControlName="password"
+      />
+      <span
+        style="color: red"
+        *ngIf="password && password.invalid && password.touched"
+      >
+        This field is required
+      </span>
+    </div>
+    <button type="submit" class="btn btn-primary me-3">Submit</button>
+    <button class="btn btn-secondary"  (click)="openSignup()">Open SignUp</button>
+  </form>
+</div>

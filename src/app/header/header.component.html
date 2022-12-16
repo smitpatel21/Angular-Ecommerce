@@ -1,0 +1,144 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Product</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <div [ngSwitch]="menuType">
+        <ul class="navbar-nav me-auto" *ngSwitchCase="'default'">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/"
+              >Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="seller-signup">seller signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cart({{ cartItem }})</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="user-signup">Login/Signup</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto" *ngSwitchCase="'seller'">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              routerLink="/seller-home"
+              >Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              routerLink="/seller-home"
+              >Product List</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              routerLink="seller-addProduct"
+              >Add Product</a
+            >
+          </li>
+          <li class="nav-item">
+            <button class="btn nav-link" (click)="logout('seller')">
+              Logout
+            </button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{ sellerName }}</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto" *ngSwitchCase="'user'">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/"
+              >Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="orders"
+              >My Orders</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="cart"
+              >Cart({{ cartItem }})</a
+            >
+          </li>
+          <li class="nav-item">
+            <button class="btn nav-link" (click)="logout('user')">
+              Logout
+            </button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{ userName }}</a>
+          </li>
+        </ul>
+      </div>
+      <form
+        #searchForm="ngForm"
+        *ngIf="menuType === 'default'"
+        (ngSubmit)="goToSearchResult(searchForm)"
+      >
+        <div class="d-flex">
+          <input
+            class="form-control me-sm-2"
+            type="text"
+            placeholder="Search"
+            (keyup)="searchProduct($event)"
+            (blur)="hideSearch()"
+            name="search"
+            ngModel
+          />
+          <button
+            [disabled]="!searchForm.value.search"
+            class="btn btn-secondary my-2 my-sm-0"
+            type="submit"
+          >
+            Search
+          </button>
+        </div>
+        <div class="search-result">
+          <div
+            *ngFor="let item of searchResult"
+            class="toast show"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div class="toast-header" (mousedown)="productDetail(item.id)">
+              <img
+                class="me-3"
+                width="100px"
+                src="{{ item.imageUrl }}"
+                alt=""
+              />
+              <strong class="me-auto">{{ item.name }}</strong>
+              <small>{{ item.price }}</small>
+            </div>
+            <div class="toast-body">Hello, world! This is a toast message.</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>

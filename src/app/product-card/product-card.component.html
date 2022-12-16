@@ -1,0 +1,16 @@
+<div class="card mb-3">
+  <img
+    src="{{ cardData.imageUrl }}"
+    alt=""
+    (click)="productDetail(cardData.id)"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ cardData.name }}</h5>
+    <h6 class="card-subtitle text-muted">{{ cardData.price }}$</h6>
+    <p class="card-text">{{ cardData.description }}</p>
+  </div>
+  <div class="card-body">
+    <a routerLink="/product-details/{{cardData.id}}" class="btn btn-primary me-2">View Details</a>
+    <button href="#" class="btn btn-dark">Add to cart</button>
+  </div>
+</div>
