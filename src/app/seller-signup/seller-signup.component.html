@@ -53,11 +53,16 @@
         type="password"
         class="form-control"
         id="exampleInputPassword1"
-        name="password"
+        name="confirmpassword"
+        formControlName="confirmpassword"
       />
       <span
         style="color: red"
-        *ngIf="password && password.invalid && password.touched"
+        *ngIf="
+          confirmPassword &&
+          confirmPassword.invalid &&
+          confirmPassword.touched
+        "
       >
         This field is required
       </span>

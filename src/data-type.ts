@@ -6,3 +6,10 @@ export interface product {
   category: string;
   color: string;
 }
+
+export interface summary{
+  amount: number;
+  tax: number;
+  promocode: number;
+  finalAmount: number;
+}

@@ -7,10 +7,21 @@
   <div class="card-body">
     <h5 class="card-title">{{ cardData.name }}</h5>
     <h6 class="card-subtitle text-muted">{{ cardData.price }}$</h6>
-    <p class="card-text">{{ cardData.description }}</p>
+    <p class="card-text">
+      {{
+        showMore ? cardData.description.substring(0, 50) : cardData.description
+      }}
+    </p>
+    <span class="badge rounded-pill bg-info" (click)="showMoreLess()"
+      >{{showMore?"show more":"show less"}}</span
+    >
   </div>
   <div class="card-body">
-    <a routerLink="/product-details/{{cardData.id}}" class="btn btn-primary me-2">View Details</a>
+    <a
+      routerLink="/product-details/{{ cardData.id }}"
+      class="btn btn-primary me-2"
+      >View Details</a
+    >
     <button href="#" class="btn btn-dark">Add to cart</button>
   </div>
 </div>

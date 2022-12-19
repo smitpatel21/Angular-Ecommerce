@@ -1,1 +1,58 @@
-<p>orders works!</p>
+<div class="table-responsive me-3">
+  <table class="table table-dark table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Ordered Items</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of orderData; let i = index">
+        <td>{{ item.id }}</td>
+        <td>
+          <span class="text-info"> Order Items</span>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Image</th>
+              <th scope="col">Price</th>
+              <th scope="col">Description</th>
+            </tr>
+            <div *ngFor="let orderedItem of item.items">
+              <td>{{ orderedItem.id }}</td>
+              <td>{{ orderedItem.name }}</td>
+              <td>
+                <img src="{{ orderedItem.imageUrl }}" width="100px" alt="" />
+              </td>
+              <td>{{ orderedItem.price }}</td>
+              <td>{{ orderedItem.description }}</td>
+            </div>
+          </div>
+        </td>
+        <td>{{ item.cartPrice }}$</td>
+        <td>
+          <span
+            class="badge {{
+              item.status === 'Placed' ? 'bg-success' : 'bg-warning'
+            }}"
+            >{{ item.status }}</span
+          >
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="cancelOrder(item.id)">
+            Cancel Order
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

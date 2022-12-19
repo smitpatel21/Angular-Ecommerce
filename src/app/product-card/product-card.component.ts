@@ -8,11 +8,16 @@ import { Router } from '@angular/router';
 })
 export class ProductCardComponent implements OnInit {
   @Input() cardData: any = [];
+  showMore: boolean = true;
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   productDetail(id: number) {
     this.router.navigate([`product-details/${id}`]);
+  }
+
+  showMoreLess() {
+    this.showMore = !this.showMore;
   }
 }

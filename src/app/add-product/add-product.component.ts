@@ -9,9 +9,13 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit {
-  constructor(private productService: ProductService,private router: Router) {}
+  sellerId: number = 0;
+  constructor(private productService: ProductService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let seller = localStorage.getItem('seller');
+    this.sellerId = seller && JSON.parse(seller).id;
+  }
 
   productForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -33,8 +37,10 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct() {
-    
-    this.productService.add(this.productForm.value);
+    this.productService.add({
+      ...this.productForm.value,
+      sellerId: this.sellerId,
+    });
     this.productForm.reset();
   }
 }

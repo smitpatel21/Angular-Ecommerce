@@ -1,1 +1,56 @@
-<p>check-out works!</p>
+<div class="d-flex">
+  <form [formGroup]="checkOutForm" (ngSubmit)="placeOrder()">
+    <h1>seller login</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="email"
+        formControlName="email"
+      />
+      <span style="color: red" *ngIf="email && email.invalid && email.touched">
+        This field is required
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Address</label>
+      <textarea
+        type="text"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="address"
+        formControlName="address"
+      ></textarea>
+      <span
+        style="color: red"
+        *ngIf="address && address.invalid && address.touched"
+      >
+        This field is required
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Contact</label>
+      <input
+        type="number"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="contact"
+        formControlName="contact"
+      />
+      <span
+        style="color: red"
+        *ngIf="contact && contact.invalid && contact.touched"
+      >
+        This field is required
+      </span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div>
+    <h3>Total amount to pay is {{ payableAmount }}$</h3>
+  </div>
+</div>

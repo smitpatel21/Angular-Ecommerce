@@ -22,11 +22,11 @@ export class HeaderComponent implements OnInit {
         if (localStorage.getItem('seller') && val.url.includes('seller')) {
           this.menuType = 'seller';
           const sellerData = localStorage.getItem('seller');
-          this.sellerName = sellerData && JSON.parse(sellerData)[0]?.name;
+          this.sellerName = sellerData && JSON.parse(sellerData).name;
         } else if (localStorage.getItem('user')) {
           this.menuType = 'user';
           const userData = localStorage.getItem('user');
-          this.userName = userData && JSON.parse(userData)[0]?.name;
+          this.userName = userData && JSON.parse(userData).name;
         } else {
           this.menuType = 'default';
         }
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     }
     const user = localStorage.getItem('user');
     if (user) {
-      const userId = JSON.parse(user)[0].id;
+      const userId = JSON.parse(user).id;
       this.productService.getCartItems(userId);
     }
     this.productService.cartData.subscribe(

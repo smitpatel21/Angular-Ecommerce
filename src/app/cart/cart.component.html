@@ -1,1 +1,60 @@
-<p>cart works!</p>
+<div class="d-flex">
+  <div class="table-responsive me-3">
+    <table class="table table-dark table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Image</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartData">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td><img src="{{ item.imageUrl }}" width="100px" alt="" /></td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.description }}</td>
+          <td>
+            <a
+              class="btn btn-warning"
+              routerLink="/product-details/{{ item.id }}"
+              >Edit</a
+            >
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="removeFromCart(item.id)">
+              removeCart
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="summary p-2">
+    <h3>summary</h3>
+    <div>
+      <span class="text-muted">Initial Amount :</span>
+      <span class="text-info">{{ summary.amount }}</span>
+    </div>
+    <div>
+      <span class="text-muted">Taxes :</span>
+      <span class="text-danger">{{ summary.tax }}</span>
+    </div>
+    <div>
+      <span class="text-muted">PromoCode :</span>
+      <span>-{{ summary.promocode }}</span>
+    </div>
+    <div>
+      <span class="text-muted">Amount :</span>
+      <span class="text-success">{{ summary.finalAmount }}</span>
+    </div>
+    <div class="d-grid gap-2">
+      <button class="btn btn-success" type="button" (click)="goToCheckOut()" >Proceed</button>
+    </div>
+  </div>
+</div>

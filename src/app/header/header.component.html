@@ -17,19 +17,19 @@
       <div [ngSwitch]="menuType">
         <ul class="navbar-nav me-auto" *ngSwitchCase="'default'">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/"
+            <a class="nav-link" routerLinkActive="active" routerLink="/"
               >Home
               <span class="visually-hidden">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="seller-signup">seller signup</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="seller-signup">seller signup</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cart({{ cartItem }})</a>
+            <a class="nav-link" routerLinkActive="active" href="#">Cart({{ cartItem }})</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="user-signup">Login/Signup</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="user-signup">Login/Signup</a>
           </li>
         </ul>
         <ul class="navbar-nav me-auto" *ngSwitchCase="'seller'">
@@ -135,7 +135,7 @@
               <strong class="me-auto">{{ item.name }}</strong>
               <small>{{ item.price }}</small>
             </div>
-            <div class="toast-body">Hello, world! This is a toast message.</div>
+            <div class="toast-body">{{item.description}}</div>
           </div>
         </div>
       </form>

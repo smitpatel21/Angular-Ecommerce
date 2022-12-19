@@ -44,6 +44,10 @@ export class SellerSignupComponent implements OnInit {
     return this.signupForm.get('password');
   }
 
+  get confirmPassword() {
+    return this.signupForm.get('confirmpassword');
+  }
+
   openLogin() {
     this.showLogin = true;
   }
@@ -72,7 +76,7 @@ export class SellerSignupComponent implements OnInit {
   localCartToDB() {
     let cartData = localStorage.getItem('localCart');
     let user = localStorage.getItem('user');
-    const userId = user && JSON.parse(user)[0].id;
+    const userId = user && JSON.parse(user).id;
     if (cartData) {
       let data = JSON.parse(cartData);
       data.forEach((item: any) => {
