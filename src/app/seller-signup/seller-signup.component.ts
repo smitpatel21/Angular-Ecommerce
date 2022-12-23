@@ -69,27 +69,9 @@ export class SellerSignupComponent implements OnInit {
     this.sellerService.login(this.loginForm.value);
     this.sellerService.isLoginError.subscribe((error) => {
       if (error) {
+        console.log('dgdgdf');
       }
     });
   }
 
-  localCartToDB() {
-    let cartData = localStorage.getItem('localCart');
-    let user = localStorage.getItem('user');
-    const userId = user && JSON.parse(user).id;
-    if (cartData) {
-      let data = JSON.parse(cartData);
-      data.forEach((item: any) => {
-        let tempCart = {
-          ...item,
-          userId,
-          productId: item.id,
-        };
-        delete item.id;
-        this.productService.addToCart(tempCart);
-      });
-      localStorage.removeItem('localCart');
-    }
-    this.productService.getCartItems(userId);
-  }
 }

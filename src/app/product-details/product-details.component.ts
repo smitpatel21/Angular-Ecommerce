@@ -55,7 +55,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productData.count = this.productCount;
       if (localStorage.getItem('user')) {
         const user = localStorage.getItem('user');
-        const userId = user && JSON.parse(user).id;
+        const userId = user && JSON.parse(user)[0].id;
         let cartData = {
           ...this.productData,
           productId: this.productData.id,
@@ -84,7 +84,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productService.removeFromCart(id).subscribe((result) => {
         if (localStorage.getItem('user')) {
           const user = localStorage.getItem('user');
-          const userId = user && JSON.parse(user).id;
+          const userId = user && JSON.parse(user)[0].id;
           this.productService.getCartItems(userId);
         }
       });

@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
     } else {
       const user = localStorage.getItem('user');
       if (user) {
-        const userId = JSON.parse(user).id;
+        const userId = JSON.parse(user)[0].id;
         this.productService.getCartItems(userId);
         this.calculateSummary();
       }
@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
       this.productService.removeFromCart(id).subscribe((result) => {
         if (result) {
           const user = localStorage.getItem('user');
-          const userId = user && JSON.parse(user).id;
+          const userId = user && JSON.parse(user)[0].id;
           this.productService.getCartItems(userId);
           this.calculateSummary();
         }

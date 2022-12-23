@@ -42,7 +42,7 @@ export class CheckOutComponent implements OnInit {
     this.productService.placeOrder(this.cartData).subscribe((result) => {
       if (result) {
         const user = localStorage.getItem('user');
-        const userId = user && JSON.parse(user).id;
+        const userId = user && JSON.parse(user)[0].id;
         this.productService.getCartItems(userId);
         this.cartData.items.forEach((element: any) => {
           this.productService.removeFromCart(element.id).subscribe((res) => {

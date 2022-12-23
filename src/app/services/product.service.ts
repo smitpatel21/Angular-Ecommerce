@@ -19,6 +19,10 @@ export class ProductService {
     return this.http.get('http://localhost:3000/products');
   }
 
+  getSellerProducts(id:number) {
+    return this.http.get(`http://localhost:3000/products?sellerId=${id}`);
+  }
+
   getSingle(id: number) {
     return this.http.get(`http://localhost:3000/products/${id}`);
   }

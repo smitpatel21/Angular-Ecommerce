@@ -29,9 +29,9 @@ export class UserService {
       .subscribe((result) => {
         if (result && result.body) {
           this.isUserLoggedIn.next(true);
-          console.log(result);
           localStorage.setItem('user', JSON.stringify(result.body));
           this.router.navigate(['/']);
+          this.isLoginError.emit(false);
         } else {
           this.isLoginError.emit(true);
         }

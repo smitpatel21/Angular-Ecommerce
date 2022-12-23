@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -8,12 +9,15 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./user-signup.component.css'],
 })
 export class UserSignupComponent implements OnInit {
-  constructor(private sellerService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private productService: ProductService
+  ) {}
 
   showLogin = false;
 
   ngOnInit(): void {
-    this.sellerService.reloadUser();
+    this.userService.reloadUser();
   }
 
   signupForm = new FormGroup({
@@ -54,14 +58,36 @@ export class UserSignupComponent implements OnInit {
       email: this.signupForm.value.email,
       password: this.signupForm.value.password,
     };
-    this.sellerService.signUp(signupData);
+    this.userService.signUp(signupData);
   }
 
   login() {
-    this.sellerService.login(this.loginForm.value);
-    this.sellerService.isLoginError.subscribe((error) => {
+    this.userService.login(this.loginForm.value);
+    this.userService.isLoginError.subscribe((error) => {
       if (error) {
+      } else {
+        this.localCartToDB();
       }
     });
+  }
+
+  localCartToDB() {
+    let cartData = localStorage.getItem('localCart');
+    let user = localStorage.getItem('user');
+    const userId = user && JSON.parse(user)[0].id;
+    if (cartData) {
+      let data = JSON.parse(cartData);
+      data.forEach((item: any) => {
+        let tempCart = {
+          ...item,
+          userId,
+          productId: item.id,
+        };
+        delete item.id;
+        this.productService.addToCart(tempCart).subscribe((result) => {});
+      });
+      localStorage.removeItem('localCart');
+    }
+    this.productService.getCartItems(userId);
   }
 }

@@ -17,7 +17,7 @@ export class OrdersComponent implements OnInit {
   getOrders() {
     const user = localStorage.getItem('user');
     if (user) {
-      const userId = JSON.parse(user).id;
+      const userId = JSON.parse(user)[0].id;
       this.productService.getOrders(userId).subscribe((result) => {
         if (result) {
           this.orderData = result;

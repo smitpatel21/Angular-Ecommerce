@@ -15,13 +15,15 @@ export class SellerHomeComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.get().subscribe((result) => {
+    let seller = localStorage.getItem('seller');
+    const sellerId = seller && JSON.parse(seller)[0].id;
+    this.productService.getSellerProducts(sellerId).subscribe((result) => {
       this.productList = result;
     });
   }
 
   editProduct(id:number) {
-    
+
   }
 
   deleteProduct(id: number) {
